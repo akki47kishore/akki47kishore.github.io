@@ -47,18 +47,13 @@ function validate(name, date, itemQuantitiesSet) {
  */
 function addNewElement(container) {
     let input = `<select class="new-item-name" id="new-item-name${newItemCount}"> `;
-    const inboundOutboundFormat = initialise().supplies;
-    for (let category in inboundOutboundFormat) {
-        for (let subcategory in inboundOutboundFormat[category]) {
-            if (typeof (inboundOutboundFormat[category][subcategory]) != "object") {
-                input += `<option value="${category}_${subcategory}">${subcategory}</option>`;
-            } else {
-                for (let item in inboundOutboundFormat[category][subcategory]) {
-                    input += `<option value="${category}_${subcategory}_${item}">${item}</option>`;
-                }
-            }
+    initialStock.forEach(element => {
+        if(element[3]){
+            input+=`<option value="${element[2]}_${element[1]}_${element[0]}">${element[0]}</option>`;
+        }else if(element[2]){
+            input+=`<option value="${element[1]}_${element[0]}">${element[0]}</option>`;
         }
-    }
+    });      
     input += `</select>
     <input type = "number" class="new-item-quantity" id="new-item-quantity${newItemCount}" onkeyup="changeFieldColor(${newItemCount},'new-item-quantity')"> </input>
     <button type="button" class="remove-button" id="new-remove-button${newItemCount}" onclick="removeNewElement('${container}','new-item-quantity'+${newItemCount},'new-item-name'+${newItemCount},'new-remove-button${newItemCount}')"><b>-</b></button>`;
@@ -111,23 +106,15 @@ function removeNewElement(section, quantity, name, button) {
 const arraySum = (accumulator, currentValue) => accumulator + currentValue;
 
 function initialise() {
-    const req = new XMLHttpRequest();
-    req.open('GET', 'shared/json/initial-stock.json', false);
-    req.send(null);
-    const inboundOutboundFormat = JSON.parse(req.responseText);
-    inboundOutboundFormat.name = '';
-    inboundOutboundFormat.date = '';
-    for (let category in inboundOutboundFormat.supplies) {
-        for (let subcategory in inboundOutboundFormat.supplies[category]) {
-            if (typeof (inboundOutboundFormat.supplies[category][subcategory]) == "object") {
-                for (let item in inboundOutboundFormat.supplies[category][subcategory]) {
-                    inboundOutboundFormat.supplies[category][subcategory][item] = 0;
-                }
-            } else {
-                inboundOutboundFormat.supplies[category][subcategory] = 0;
-            }
+
+    let inboundOutboundFormat= Object.assign({name: '', date: ''}, {supplies :currentStock});
+    initialStock.forEach(element => {
+        if(element[3]){
+            inboundOutboundFormat.supplies[element[2]][element[1]][element[0]] = 0;
+        }else if(element[2]){
+            inboundOutboundFormat.supplies[element[1]][element[0]] = 0;
         }
-    }
+    }); 
     return inboundOutboundFormat;
 }
 

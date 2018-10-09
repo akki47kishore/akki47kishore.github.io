@@ -43,6 +43,8 @@ function getFile(url, section) {
     document.getElementById(section).innerHTML = req.responseText;
 }
 
+let initialStock;
+
 /**
  * Initialisation on page load
  */
@@ -65,18 +67,17 @@ window.onload = function () {
         localStorage.setItem('outbound-count', '0');
         setCurrentStock();
     }
+    initialStock = initialStockArrayConverter();
 };
 
 /**
  * Initialising Current Stock with initial stock values
  */
-let initialStock;
-
 function setCurrentStock() {
     const req = new XMLHttpRequest();
     req.open('GET', 'shared/json/initial-stock.json', false);
     req.send(null);
-    initialStock = JSON.parse(req.responseText);
+    const initialStock = JSON.parse(req.responseText);
     currentStock = initialStock.supplies;
     localStorage.setItem('currentStock', JSON.stringify(currentStock));
 }
@@ -105,3 +106,20 @@ function locationHashChanged() {
 }
 
 window.onhashchange = locationHashChanged;
+
+function initialStockArrayConverter() {
+    arrayOfItems = [];
+    const currentStock = JSON.parse(localStorage.getItem('currentStock'));
+    for (category in currentStock) {
+        for (item in currentStock[category]) {
+            if (typeof (currentStock[category][item]) == "object") {
+                for (subCategoryItems in currentStock[category][item]) {
+                    arrayOfItems.push([subCategoryItems,item,category,currentStock[category][item][subCategoryItems]]);
+                }
+            } else {
+                arrayOfItems.push([item,category,currentStock[category][item]]);
+            }
+        }
+    }
+    return arrayOfItems;
+}
