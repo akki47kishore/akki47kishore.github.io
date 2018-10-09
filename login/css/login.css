@@ -1,0 +1,102 @@
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+a:hover,
+a:visited,
+a:active {
+    text-decoration: none;
+}
+
+
+.login {
+    background-image: url("../../assets/welcome-background2.jpeg");
+    width: 100%;
+    height: 500px;
+}
+
+.imgcontainer {
+    text-align: center;
+    position: relative;
+    margin: auto;
+    padding-top: 2%;
+    padding-bottom: 8%;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+.message{
+    color: #fff000;
+    position: relative;
+    margin-left: auto;
+}
+
+
+.form-section {
+
+    width: 45%;
+    background-color: black;
+    opacity: 0.45;
+    position: relative;
+    margin: auto;
+    height: 100%;
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s;
+    padding-left :9%;
+    padding-right: 9%;
+    padding-top: 5%;
+}
+
+.label {
+    margin-top: 5%;
+    position :relative;
+    font-size: 20px;
+    background: -webkit-linear-gradient(right, rgb(0, 245, 166), #8e88c0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button {
+    background-color: whitesmoke;
+    position: relative;
+    color: #2f2677;
+    border: 1px solid transparent;
+    border-radius: 15%;
+    padding: 2%;
+    margin-left: 5%;
+}
+
+.username, .password{
+    position: relative;
+    width: 97%;
+    margin: auto; 
+}
+
+.login-button {
+    margin-left: 0%;
+}
+
+.button:hover {
+    background-color: #2f2677;
+    color: whitesmoke;
+}

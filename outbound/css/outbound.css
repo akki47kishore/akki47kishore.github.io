@@ -1,0 +1,203 @@
+
+.add-outbound{
+    background-color: #703030;
+    color: whitesmoke;
+    border: none;
+    padding: 5px;
+    margin-bottom: 5%;
+    right: 0%;
+    margin-top: 4%; 
+    border-radius: 5%;
+    
+}
+
+.close-form {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    opacity: .75;
+}
+
+.close-form:hover{
+    opacity: 1;
+}
+
+.outbound-form {    
+    background-color: white;
+    border-radius: 5px;
+    padding: 5%;
+    padding-left: 7%;
+    padding-right: 0%; 
+    width: 60%;
+    position: relative;
+    margin: auto;
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+.new-outbound-modal {
+    opacity: .9;
+    display: none; 
+    position: fixed; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(27, 26, 26); 
+}
+
+.add-button{
+    position: absolute;
+    right: 13%;
+    padding: 0.75%;
+    margin-right: 2%; 
+    color: white;
+    background-color: #008CBA;
+    border: none;
+    border-radius: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.add-button:hover{
+    background-color: #19579e;
+}
+
+.new-item-quantity, .new-item-name, .new-item-type{
+    display: inline-block;
+    width: 36.5%;
+    margin-right: 3%;
+    margin-left: 3%;
+    padding: 0.6%;
+}
+
+
+.new-item-name{
+    margin-top: 11px;
+    padding: 1%;
+    margin-left: 0%;
+}
+
+.new-item-quantity{
+    margin-top: 8px;
+}
+
+.outbound-items{
+    margin: 11%;
+    margin-right: 6%;
+    
+}
+.quantity{
+    margin-left: 29%;
+}
+
+.itemname {
+    margin-left: 14%;
+    margin-right: 3%;
+    margin-left: 11%;
+}
+
+.new-elements{
+    position : relative;
+    padding-right: 4%;
+} 
+
+.label{
+    color: black;
+    font-size: 15px;
+    margin-left: -2%;
+}
+
+.name-link{
+    font-size: 17px;
+    color:  rgb(92, 92, 92);
+}
+
+ .name-link:nth-child(even){
+    color:white !important;
+} 
+
+.name-link:hover {
+    cursor: pointer;
+}
+
+.date{
+    margin-left: 1.25%;
+    width : 27%;
+}
+
+.outbound-details{
+    background-color: white;
+    border-radius: 5px;
+    padding: 5%;
+    margin: auto;
+    width: 50%;
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+.headings{
+     width: 60%;
+     background: -webkit-linear-gradient( right,rgb(0, 245, 166),#90329a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0%;
+}
+hr{
+    margin-top: 0%; 
+    height: 3px;
+    background-color: #703030;
+}
+
+.nameAndDate{
+    font-size: 20px;
+   
+}
+
+.add-new-outbound{
+    background-color:#2e2288;
+    margin-top: 15%;
+    padding: 2.5%;
+    margin-left: 16%;
+    width :50%;
+    border: none;
+    border-radius: 2%;
+    color: white;
+}
+
+.error-message{
+    color: red;
+}
+
+.remove-button{
+    padding: 0.75%;
+    margin-right: 2%; 
+    color: white;
+    background-color: rgb(179, 24, 83);
+    border: none;
+    border-radius: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 1.7%;
+}
+.remove-button:hover{
+    background-color: #b3112c;
+}

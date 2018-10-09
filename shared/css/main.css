@@ -1,0 +1,135 @@
+
+.header{
+    background-image: url("../../assets/welcome-background.jpeg");
+    padding: 4%;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: nowrap ;
+    justify-content: space-between;
+}
+
+.page-not-found{
+    width: 100%;
+    height: 100%;
+    position:fixed;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+    height: 25px;
+    border-radius: 10px;
+    border: 2px solid  #703030;
+    background-image: url('../../assets/search.png');
+    background-repeat: no-repeat;
+    text-indent :5%;
+    background-position-x: 95%; 
+    }    
+.header-text{
+    margin-top: 0%;
+    color: #703030;
+    font-size: 30px;
+}
+
+.hide-body{
+    position: fixed;
+    width : 100%;
+}
+
+.content{
+    
+    background-image: url("../../assets/welcome-background2.jpeg");
+    height: 100%;
+    
+}
+.index{
+    padding:13%; 
+}
+
+.about{
+    padding:10%; 
+}
+
+.welcome{
+    margin-top: 0%;
+    text-align: center;
+    font-size: 72px;
+    background: -webkit-linear-gradient( right,rgb(0, 245, 166),#f0f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+.welcome-text{
+    text-align: center;
+    font-size: 22px;
+    background: -webkit-linear-gradient( right,rgb(0, 245, 166),#f0f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+a{
+    padding: 13px;
+    text-decoration : none; 
+    color : #000000;
+}
+a:hover, a:visited, a:active {
+    text-decoration : none; 
+}
+
+.footer{
+    margin-top: 0%;
+    padding: 3%;
+    background-image: url("../../assets/welcome-background.jpeg");
+}
+.footer-value{
+    text-align: center;
+    color: #703030;
+}
+
+.nav-bar{
+    width :50%;
+}
+
+
+.about-link, .login-link, .home-link{
+    padding: 1%;
+    border-radius: 28px ;
+    width: 7em;
+    flex-grow: 1;
+    border: 1px solid #703030;
+    float: right;
+    margin-right:2%;
+    color: white;
+    background-color:#703030;
+}
+.about-link:hover, .login-link:hover, .home-link:hover{
+
+    background-color:white !important;;
+    color: #703030 !important;;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.begin{
+    position: relative;
+    margin:auto;
+    font-size: 20px;
+    background: -webkit-linear-gradient( right,rgb(0, 245, 166),#f0f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    border: transparent;
+}
+.begin:hover{
+    background: -webkit-linear-gradient( right,#f0f,rgb(0, 245, 166));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+.active-page{
+    background-color:white;
+    color: #703030;
+}

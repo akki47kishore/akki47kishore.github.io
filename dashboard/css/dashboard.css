@@ -1,0 +1,167 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: block;
+    width : 100%;
+}
+
+table {
+    border-radius: 10px 10px 0px 0px; 
+    width: 100% !important;
+    border: 1px solid #ddd !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 12%; 
+    background-color: black;
+    opacity: 0.6;
+}
+
+th, td {
+    text-align: center;
+    padding: 1%;
+    width: 30% !important;
+}
+
+th{
+    color: white;
+    opacity: .75;
+    font-size: 18px;
+    padding: 2%;
+    
+}
+
+
+tr:nth-child(even) {
+    color: #f2f2f2;
+    background-color:black !important;
+}
+
+
+tr :hover  {
+    cursor: pointer;
+}
+.data-value{
+    text-align: right;
+    width: 45%;
+    display: inline-block;
+    padding-right: 21%;
+  
+}
+
+
+.data{
+    text-align: left;
+    margin-left: 9%;
+    width: 45%;
+    display: inline-block;
+}
+
+
+.details-table{
+    background: black !important;
+    color: #ddd !important;
+}
+
+.clothType , .clothType-data{
+    background: greenyellow;
+    color: black !important;
+    width: 50% ;
+    display: inline-block;
+    padding-top: 0.6%;
+    padding-bottom: 0.4%;
+    text-align: left;
+    padding-left: 3%;
+    font-weight: bold;
+}
+
+.cloth-items , .cloth-items-value{
+    width: 49% ;
+    display: inline-block;
+}
+.clothType-data{
+    padding-right: 21%;
+    text-align: right; 
+}
+.cloth-items{
+    text-align: left;
+    padding-left: 8%;
+}
+.cloth-items-value{
+    text-align: right;
+    padding-right: 20.5%;
+   
+}
+
+.nav-button{
+    width: 100%;
+    text-align: left;
+    border: none;
+    background-color:rgb(0, 0, 0);
+    color: white;
+    padding: 15%;
+    opacity: 0.65;
+    
+}
+.nav-button:hover{
+    background-color: #8cbd41  !important;
+    color: black;
+}
+
+.column-container{
+    position:relative;
+    height: 100%;
+    padding-left: 2%; 
+    width: 100%;
+    display: flex;
+}
+
+.inbound-section, .outbound-section {
+    margin-top: 13%;
+}
+
+.side-nav{
+    margin-left: 3%;
+    width: 20%;
+    display:inline-block;
+    margin-top: 10.5%;
+    margin-bottom: 10%;
+}
+
+.dashboard-container{
+    margin-left: 5%;
+    display:inline-block;
+    height:100%;
+    width: 60%;
+    position: relative;
+    
+}
+
+.nowactive{
+    background-color:yellowgreen;
+    color: black;
+}
+
+.pagination-option{
+    padding: 1%;
+    background-color: #703030;
+    border: none;
+    color: white;
+    position: absolute;
+    top :-1.5%;
+    margin-left: 10%; 
+}
+
+#inbound-table_filter, #outbound-table_filter{
+    float: none;
+}
+
+.current-stock-details{
+    width: 60%;
+    margin-left: 19%;
+    background: white;
+    padding: 5%;
+}

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="dashboard/css/graph.css">
+
+<section class="slideshowContainer">
+    <!-- section's for each graph -->
+    <section class="slides fading slide1">
+        <section id="current"><span class="loading-message">loading</span><div class="loader"></div></section>
+    </section>
+    
+    <section class="slides fading slide2">
+        <section id="inbound-slide" > <span class ="inbound-span" id="no-item-message1"><b>No Items Inbound as yet</b></span></section>
+    </section>
+
+    <section class="slides fading slide2">
+        
+        <section id="outbound-slide" ><span class ="inbound-span" id="no-item-message2"><b>No Items Outbound as yet</b></span></section>
+    </section>
+
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next-button" onclick="plusSlides(1)">&#10095;</a>
+
+    <section class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </section>
+</section>

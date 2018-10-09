@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="outbound/css/outbound.css">
+<section class="outbound-section" id="outbound-section">
+    <table id="outbound-table">
+    </table>
+    <button onclick="addOutbound()" class="add-outbound"><b>Request Stock</b></button>
+</section>
+<section class="new-outbound-modal" id="outbound-modal">
+    <span class="close-form" id="close-form" onclick="closeModal('outbound-modal')">&times;</span>
+    <form id="outbound-form" class="outbound-form">
+
+        <label for="name" class="label"><b>Name</b></label>
+        <input type="text" placeholder="Enter Name" name="name" id="name" class="name" required><br><br>
+        <label for="date" class="label"><b>Date</b></label>
+        <input type="date" name="date" id="date" class="date" required>
+        <br><br>
+
+        <section id="outbound-elements-section" class="new-elements">
+            <b class="outbound-items itemname">Item Name</b>
+            <b class="outbound-items quantity">Quantity</b>
+            <br>
+        </section>
+        <section>
+            <p id="error-message" class="error-message"></p>
+        </section><br>
+        <button type="button" class="add-button" onclick="addNewElement('outbound-elements-section')"><b>+</b></button>
+        <button type="button" class="add-new-outbound" onclick="addNewOutbound()"><b>Done</b></button>
+    </form>
+</section>
+<section class="new-outbound-modal" id="outbound-details-modal">
+    <span class="close-form" id="close-form" onclick="closeModal('outbound-details-modal')">&times;</span>
+    <section class="outbound-details">
+        <h2 class="headings">Name : <b class="nameAndDate"><span id="nameSection"></span></b> </h2>
+        <h2 class="headings">Date : <b class="nameAndDate"><span id="dateSection"></span> </b></h2><br>
+        <table id="outbound-item-details">
+            <thead>
+                <tr>
+                    <th>Item Name </th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+        </table>
+    </section>
+</section>

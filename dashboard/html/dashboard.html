@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="dashboard/css/dashboard.css">
+
+<section class="column-container">
+    <section class="side-nav" id="side-nav">
+        <ul>
+            <li><button class="nav-button" id="dashboard" onclick="router('dashboard')"><b>Dashboard</b></button></li>
+            <li><button class="nav-button" id="inbound" onclick="router('inbound')"><b>Inbound</b></button></li>
+            <li><button class="nav-button" id="outbound" onclick="router('outbound')"><b>Outbound</b></button></li>
+            <li><button class="nav-button" id="current-stock" onclick="changeToCurrentStock()"><b>Current Stock</b></button></li>
+        </ul>
+    </section>
+
+    <section class="dashboard-container" id='dashboard-container'>
+
+    </section>
+
+    <link rel="stylesheet" href="shared/css/currentStock.css">
+    <section class="new-outbound-modal" id="stock-details-modal">
+        <span class="close-form" id="close-form" onclick="closeModal('stock-details-modal')">&times;</span>
+        <section class = "current-stock-details">
+            <h2 class="headings">Current - Stock </h2> <hr><br><br>
+            <table class="stock-details" id="stock-details">
+                <thead>
+                    <tr>
+                        <th>Item Name </th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </section>
+
+</section>

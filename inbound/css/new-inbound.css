@@ -1,0 +1,17 @@
+.inbound-form{
+    padding: 5%;
+    background-color: black;
+    opacity: .45;
+    margin-top: 13%; 
+    
+}
+
+.add-button{
+    position: absolute;
+    right: 18%;
+    padding: 1%;
+    color: white;
+    background-color: #2e2288;
+    border: none;
+    border-radius: 2%;
+}

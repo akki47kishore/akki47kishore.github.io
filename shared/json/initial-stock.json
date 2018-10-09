@@ -1,0 +1,48 @@
+{
+    "supplies": {
+        "food": {
+            "cerelac": 10,
+            "biscuit": 10,
+            "rusk": 5,
+            "bread": 30,
+            "rice": 5,
+            "jam": 20,
+            "wheat": 10,
+            "milk": 20,
+            "water": 10
+        },
+        "clothes": {
+            "men": { 
+                "shirts" : 10 ,
+                "pants" : 20 ,
+                "innerwearMen" : 30 
+            },
+            "women":{
+                "top" : 30,
+                "bottom" : 50,
+                "innerwearLadies" : 60
+            },
+            "kids": {
+                "frocks": 70,
+                "shorts": 30,
+                "diaper": 20
+            }
+        },
+        "toiletries": {
+            "soap": 50,
+            "detergent": 60,
+            "brush": 50,
+            "paste": 40,
+            "mug": 54,
+            "towel": 32
+        },
+        "medicines": {
+            "dettol": 40,
+            "dolo": 40,
+            "bandaid": 50,
+            "paracetamol": 60,
+            "vicks": 70,
+            "cetirizine": 80
+        }
+    }
+}
