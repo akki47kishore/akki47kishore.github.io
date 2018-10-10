@@ -43,11 +43,11 @@ function getFile(url, section) {
     document.getElementById(section).innerHTML = req.responseText;
 }
 
-let initialStock;
-let itemList = [];
 /**
  * Initialisation on page load
  */
+let initialStock;
+let itemList = [];
 let currentStock;
 window.onload = function () {
     changeLink('home');
@@ -71,7 +71,7 @@ window.onload = function () {
 };
 
 /**
- * Initialising Current Stock with initial stock values
+ * Initialising Current Stock with initial stock values.
  */
 function setCurrentStock() {
     const req = new XMLHttpRequest();
