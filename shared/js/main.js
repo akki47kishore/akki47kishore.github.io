@@ -109,15 +109,18 @@ window.onhashchange = locationHashChanged;
 
 function initialStockArrayConverter() {
     arrayOfItems = [];
-    const currentStock = JSON.parse(localStorage.getItem('currentStock'));
-    for (category in currentStock) {
-        for (item in currentStock[category]) {
-            if (typeof (currentStock[category][item]) == "object") {
-                for (subCategoryItems in currentStock[category][item]) {
-                    arrayOfItems.push([subCategoryItems,item,category,currentStock[category][item][subCategoryItems]]);
+    const req = new XMLHttpRequest();
+    req.open('GET', 'shared/json/initial-stock.json', false);
+    req.send(null);
+    const stock = JSON.parse(req.responseText).supplies;
+    for (category in stock) {
+        for (item in stock[category]) {
+            if (typeof (stock[category][item]) == "object") {
+                for (subCategoryItems in stock[category][item]) {
+                    arrayOfItems.push([subCategoryItems,item,category,stock[category][item][subCategoryItems]]);
                 }
             } else {
-                arrayOfItems.push([item,category,currentStock[category][item]]);
+                arrayOfItems.push([item,category,stock[category][item]]);
             }
         }
     }

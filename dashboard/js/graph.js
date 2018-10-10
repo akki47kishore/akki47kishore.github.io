@@ -41,12 +41,16 @@ function findSum(arrayName) {
     array.forEach((element) => {
         data.push(JSON.parse(localStorage.getItem(element)));
     });
-    data = [data.map((data => data.supplies.food)), data.map(data => data.supplies.clothes), data.map(data => data.supplies.toiletries), data.map(data => data.supplies.medicines)];
+    let stock = [];
+    const curStock = JSON.parse(localStorage.getItem('currentStock'));
+    for(let item in curStock){
+        stock.push(data.map((data => data.supplies[item])));
+    }
     let categorySum = 0;
     let flag = 0;
     const rows = [];
     let i = 0;
-    for (let itemCategory of data) {
+    for (let itemCategory of stock) {
         for (let items of itemCategory) {
             for (let value in items) {
                 if (typeof (items[value]) == "object") {
@@ -72,11 +76,11 @@ function drawChartCurrent() {
     const data = new google.visualization.DataTable();
     data.addColumn('string', 'Item');
     data.addColumn('number', 'Percentage');
-    const req = new XMLHttpRequest();
-    req.open('GET', 'shared/json/initial-stock.json', false);
-    req.send(null);
-    let initialStock = JSON.parse(req.responseText);
-    initialStock = initialStock.supplies;
+    // const req = new XMLHttpRequest();
+    // req.open('GET', 'shared/json/initial-stock.json', false);
+    // req.send(null);
+    // let initialStock = JSON.parse(req.responseText);
+    //initialStock = initialStock.supplies;
     let inboundSum = [0, 0, 0, 0];
     let outboundSum = [0, 0, 0, 0];
     const incoming = JSON.parse(localStorage.getItem('inbound'));
