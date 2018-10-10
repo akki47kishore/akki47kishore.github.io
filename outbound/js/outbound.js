@@ -8,7 +8,7 @@ function addNewOutbound() {
     let itemIndex;
     let quantity;
     currentStock = JSON.parse(localStorage.getItem('currentStock'));
-    const temp = JSON.parse(JSON.stringify(currentStock));
+    const temp = JSON.parse(JSON.stringify(currentStock));              // create a deep copy of current stock
     const name = document.getElementById('name').value;
     const date = document.getElementById('date').value;
     if (itemNamesSet) {

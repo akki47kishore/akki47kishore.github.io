@@ -44,7 +44,7 @@ function getFile(url, section) {
 }
 
 let initialStock;
-
+let itemList = [];
 /**
  * Initialisation on page load
  */
@@ -124,6 +124,7 @@ function initialStockArrayConverter() {
                 arrayOfItems.push([item,category,stock[category][item]]);
             }
         }
+        itemList.push(category);
     }
    
     return arrayOfItems;

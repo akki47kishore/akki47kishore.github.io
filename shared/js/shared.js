@@ -81,7 +81,7 @@ const addInbound = () => {
     return 1;
 }
 
-const itemList = ['Food', 'Clothes', 'Toiletries', 'Medicines'];
+
 
 /**
  * Removing an {item - quantity - button}  set

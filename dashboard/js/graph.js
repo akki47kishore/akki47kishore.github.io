@@ -79,8 +79,7 @@ function drawChartCurrent() {
     const req = new XMLHttpRequest();
     req.open('GET', 'shared/json/initial-stock.json', false);
     req.send(null);
-    let initialStock = JSON.parse(req.responseText);
-    initialStock = initialStock.supplies;
+    let initialStock = JSON.parse(req.responseText).supplies;
     let inboundSum = [0, 0, 0, 0];
     let outboundSum = [0, 0, 0, 0];
     const incoming = JSON.parse(localStorage.getItem('inbound'));
