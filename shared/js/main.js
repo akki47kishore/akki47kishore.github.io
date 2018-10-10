@@ -107,6 +107,10 @@ function locationHashChanged() {
 
 window.onhashchange = locationHashChanged;
 
+/**
+ * Convert the initial stock stored as JSON file to array form. Also initialises itemList with all
+ *  available categories of items
+ */
 function initialStockArrayConverter() {
     arrayOfItems = [];
     const req = new XMLHttpRequest();

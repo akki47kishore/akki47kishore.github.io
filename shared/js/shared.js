@@ -66,21 +66,11 @@ function addNewElement(container) {
 /**
  * Display Outbound Modal.
  */
-const addOutbound = () => {
-    document.getElementById('outbound-modal').style.display = "block";
+const openModal = (inventoryType) => {
+    document.getElementById(`${inventoryType}-modal`).style.display = "block";
     document.body.classList.add("hide-body");
     return 1;
 };
-
-/**
- * Display Inbound Modal.
- */
-const addInbound = () => {
-    document.getElementById('inbound-modal').style.display = "block";
-    document.body.classList.add("hide-body");
-    return 1;
-}
-
 
 
 /**
