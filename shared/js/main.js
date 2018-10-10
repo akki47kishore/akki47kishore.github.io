@@ -113,6 +113,7 @@ function initialStockArrayConverter() {
     req.open('GET', 'shared/json/initial-stock.json', false);
     req.send(null);
     const stock = JSON.parse(req.responseText).supplies;
+
     for (category in stock) {
         for (item in stock[category]) {
             if (typeof (stock[category][item]) == "object") {
@@ -124,5 +125,6 @@ function initialStockArrayConverter() {
             }
         }
     }
+   
     return arrayOfItems;
 }
