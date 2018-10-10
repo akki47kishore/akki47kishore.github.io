@@ -51,17 +51,24 @@ function addNewOutbound() {
             }
         }
     }
-    for (let itemCategory in inboundOutboundFormat.supplies) {
-        for (let itemsubCategory in inboundOutboundFormat.supplies[itemCategory]) {
-            if (typeof (inboundOutboundFormat.supplies[itemCategory][itemsubCategory]) == "object") {
-                for (let value in inboundOutboundFormat.supplies[itemCategory][itemsubCategory]) {
-                    currentStock[itemCategory][itemsubCategory][value] -= inboundOutboundFormat.supplies[itemCategory][itemsubCategory][value];
-                }
-            } else {
-                currentStock[itemCategory][itemsubCategory] -= inboundOutboundFormat.supplies[itemCategory][itemsubCategory];
-            }
+    // for (let itemCategory in inboundOutboundFormat.supplies) {
+    //     for (let itemsubCategory in inboundOutboundFormat.supplies[itemCategory]) {
+    //         if (typeof (inboundOutboundFormat.supplies[itemCategory][itemsubCategory]) == "object") {
+    //             for (let value in inboundOutboundFormat.supplies[itemCategory][itemsubCategory]) {
+    //                 currentStock[itemCategory][itemsubCategory][value] -= inboundOutboundFormat.supplies[itemCategory][itemsubCategory][value];
+    //             }
+    //         } else {
+    //             currentStock[itemCategory][itemsubCategory] -= inboundOutboundFormat.supplies[itemCategory][itemsubCategory];
+    //         }
+    //     }
+    // }
+    initialStock.forEach(element => {
+        if(element[3]){
+            currentStock[element[2]][element[1]][element[0]] -= inboundOutboundFormat.supplies[element[2]][element[1]][element[0]];
+        }else if(element[2]){
+            currentStock[element[1]][element[0]] -= inboundOutboundFormat.supplies[element[1]][element[0]];
         }
-    }
+    });
     inboundOutboundFormat.name = name;
     inboundOutboundFormat.date = date;
     let outgoing = [];
