@@ -1,25 +1,30 @@
+let initialStock;
+const itemList = [];
+const slideIndex = 1;
+let currentStock;
+
 /**
  * Set currently selected link as active.
- * 
+ *
  * @param choice - represents link to be set active.
  */
 function changeLink(choice) {
     let options = ['dashboard', 'inbound', 'outbound'];
-    if (typeof (options.find((element) => element == choice)) != 'undefined') {
-        options.forEach(function (option) {
-            if (option == choice) {
-                document.getElementById(choice).classList.add("nowactive");
+    if (typeof (options.find(element => element === choice)) !== 'undefined') {
+        options.forEach((option) => {
+            if (option === choice) {
+                document.getElementById(choice).classList.add('nowactive');
                 window.history.pushState(choice, `state${choice}`, `#${choice}`);
                 localStorage.setItem('state', choice);
-
             } else {
-                document.getElementById(option).classList.remove("nowactive");
+                document.getElementById(option).classList.remove('nowactive');
             }
+            return 1;
         });
     } else {
         options = ['about', 'home', 'login'];
-        options.forEach(function (option) {
-            if (option == choice) {
+        options.forEach((option) => {
+            if (option === choice) {
                 document.getElementById(choice).classList.add('active-page');
                 window.history.pushState(choice, `state${choice}`, `#${choice}`);
                 localStorage.setItem('state', choice);
@@ -28,7 +33,6 @@ function changeLink(choice) {
             }
         });
     }
-
 }
 
 /**
@@ -44,11 +48,42 @@ function getFile(url, section) {
 }
 
 /**
+ * Initialising Current Stock with initial stock values
+ */
+function setCurrentStock() {
+    const req = new XMLHttpRequest();
+    req.open('GET', 'shared/json/initial-stock.json', false);
+    req.send(null);
+    const initialStock = JSON.parse(req.responseText);
+    currentStock = initialStock.supplies;
+    localStorage.setItem('currentStock', JSON.stringify(currentStock));
+}
+
+function initialStockArrayConverter() {
+    arrayOfItems = [];
+    const req = new XMLHttpRequest();
+    req.open('GET', 'shared/json/initial-stock.json', false);
+    req.send(null);
+    const stock = JSON.parse(req.responseText).supplies;
+
+    for (category in stock) {
+        for (item in stock[category]) {
+            if (typeof (stock[category][item]) === 'object') {
+                for (subCategoryItems in stock[category][item]) {
+                    arrayOfItems.push([subCategoryItems, item, category, stock[category][item][subCategoryItems]]);
+                }
+            } else {
+                arrayOfItems.push([item, category, stock[category][item]]);
+            }
+        }
+        itemList.push(category);
+    }
+    return arrayOfItems;
+}
+
+/**
  * Initialisation on page load
  */
-let initialStock;
-let itemList = [];
-let currentStock;
 window.onload = function () {
     changeLink('home');
     const loginFlag = localStorage.getItem('login-flag');
@@ -57,7 +92,7 @@ window.onload = function () {
     }
     currentStock = JSON.parse(localStorage.getItem('currentStock'));
     router('home');
-    let checkflag = localStorage.getItem("inbound");
+    const checkflag = localStorage.getItem('inbound');
     if (!checkflag) {
         const inbound = [];
         localStorage.setItem('inbound', JSON.stringify(inbound));
@@ -70,17 +105,6 @@ window.onload = function () {
     initialStock = initialStockArrayConverter();
 };
 
-/**
- * Initialising Current Stock with initial stock values.
- */
-function setCurrentStock() {
-    const req = new XMLHttpRequest();
-    req.open('GET', 'shared/json/initial-stock.json', false);
-    req.send(null);
-    const initialStock = JSON.parse(req.responseText);
-    currentStock = initialStock.supplies;
-    localStorage.setItem('currentStock', JSON.stringify(currentStock));
-}
 
 const optionlinks = ['dashboard', 'inbound', 'outbound'];
 
@@ -88,16 +112,16 @@ function locationHashChanged() {
     const link = (location.hash).substring(1);
     if (localStorage.getItem('login-flag') === '1') {
         getFile('dashboard/html/dashboard.html', 'content');
-        if (typeof (optionlinks.find(x => x === link)) != 'undefined') {
+        if (typeof (optionlinks.find(x => x === link)) !== 'undefined') {
             changeLink('home');
         }
-        if (link != 'login') {
+        if (link !== 'login') {
             router(link);
         } else {
             router('dashboard');
         }
     } else if (localStorage.getItem('login-flag') === '0') {
-        if (typeof (optionlinks.find(x => x === link)) != 'undefined') {
+        if (typeof (optionlinks.find(x => x === link)) !== 'undefined') {
             router('Not Found');
         } else {
             router(link);
@@ -106,30 +130,3 @@ function locationHashChanged() {
 }
 
 window.onhashchange = locationHashChanged;
-
-/**
- * Convert the initial stock stored as JSON file to array form. Also initialises itemList with all
- *  available categories of items
- */
-function initialStockArrayConverter() {
-    arrayOfItems = [];
-    const req = new XMLHttpRequest();
-    req.open('GET', 'shared/json/initial-stock.json', false);
-    req.send(null);
-    const stock = JSON.parse(req.responseText).supplies;
-
-    for (category in stock) {
-        for (item in stock[category]) {
-            if (typeof (stock[category][item]) == "object") {
-                for (subCategoryItems in stock[category][item]) {
-                    arrayOfItems.push([subCategoryItems,item,category,stock[category][item][subCategoryItems]]);
-                }
-            } else {
-                arrayOfItems.push([item,category,stock[category][item]]);
-            }
-        }
-        itemList.push(category);
-    }
-   
-    return arrayOfItems;
-}

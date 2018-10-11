@@ -1,4 +1,5 @@
-const routes = [{
+const routes = [
+    {
         name: 'dashboard',
         path: 'dashboard/html/graph.html',
         script: 'dashboard/js/graph.js'
@@ -37,38 +38,38 @@ const routes = [{
  * @param  routeName - specifies the route selected.
  */
 function router(routeName) {
-    let route = routes.find(x => x.name === routeName);
-    if (typeof (route) != 'undefined') {
+    const route = routes.find(x => x.name === routeName);
+    if (typeof (route) !== 'undefined') {
         changeLink(route.name);
-        if (route.script != '') {
-            let parent = document.getElementById('JSscripts');
-            let child = document.createElement('script');
+        if (route.script !== '') {
+            const parent = document.getElementById('JSscripts');
+            const child = document.createElement('script');
             child.src = route.script;
             parent.innerHTML = '';
             parent.appendChild(child);
             child.onload = function () {
                 getFile(route.path, 'dashboard-container');
-                if (route.name == 'dashboard') {
+                if (route.name === 'dashboard') {
                     drawGraphs();
                 } else {
-                    let tablename, stockData;
-                    stockData = JSON.parse(localStorage.getItem(route.name));
-                    tablename = `#${route.name}-table`;
+                    const stockData = JSON.parse(localStorage.getItem(route.name));
+                    const tablename = `#${route.name}-table`;
                     if (stockData && stockData.length > 0) {
-                        let dataSet = [];
+                        const dataSet = [];
                         let x;
                         stockData.forEach((element, index) => {
                             x = JSON.parse(localStorage.getItem(element));
                             dataSet.push([index + 1, sentenceCase(x.name), x.date]);
                         });
-                        let table = $(tablename).DataTable({
+                        const table = $(tablename).DataTable({
                             ordering: true,
                             searching: true,
                             data: dataSet,
                             scrollY: 300,
                             colReorder: true,
                             responsive: true,
-                            columns: [{
+                            columns: [
+                                {
                                     title: 'No.'
                                 },
                                 {
@@ -87,24 +88,21 @@ function router(routeName) {
                             }
                         });
                         table.page.len(10).draw();
-                        let selectbox = document.getElementsByName(`${route.name}-table_length`);
-                        selectbox = selectbox[0];
+                        const selectbox = document.getElementsByName(`${route.name}-table_length`)[0];
                         selectbox.classList.add('pagination-option');
                     }
                 }
-            }
-        } else if (route.name == 'about') {
+            };
+        } else if (route.name === 'about') {
             getFile(route.path, 'content');
-
-        } else if (route.name == 'login') {
+        } else if (route.name === 'login') {
             const loginFlag = localStorage.getItem('login-flag');
             if (loginFlag === '1') {
                 localStorage.setItem('login-flag', '0');
                 document.getElementById('login').innerHTML = '<b>Login</b>';
             }
             getFile(route.path, 'content');
-
-        } else if (route.name == 'home') {
+        } else if (route.name === 'home') {
             const loginFlag = localStorage.getItem('login-flag');
             if (loginFlag === '0') {
                 getFile(route.path, 'content');
@@ -113,7 +111,8 @@ function router(routeName) {
             }
         }
     } else {
-        document.getElementById('content').innerHTML = `<img src ='assets/404-Page.png' class='page-not-found'></img>`;
+        document.getElementById('content').innerHTML = `<img src ='assets/404-Page.png' 
+        class='page-not-found'></img>`;
     }
 }
 

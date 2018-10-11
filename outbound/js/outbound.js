@@ -8,7 +8,7 @@ function addNewOutbound() {
     let itemIndex;
     let quantity;
     currentStock = JSON.parse(localStorage.getItem('currentStock'));
-    const temp = JSON.parse(JSON.stringify(currentStock));              // create a deep copy of current stock
+    const temp = JSON.parse(JSON.stringify(currentStock)); // create a deep copy of current stock
     const name = document.getElementById('name').value;
     const date = document.getElementById('date').value;
     if (itemNamesSet) {
@@ -16,45 +16,42 @@ function addNewOutbound() {
         if (result === 0) {
             return 0;
         }
-        for (let key in itemNamesSet) {
+        for (const key in itemNamesSet) {
             itemIndex = itemNamesSet[key].value;
             quantity = parseInt(itemQuantitiesSet[key].value);
-            if (itemIndex && newItemCount != 0) {
+            if (itemIndex && newItemCount !== 0) {
                 quantity = parseInt(itemQuantitiesSet[key].value);
                 itemIndex = itemIndex.split('_');
-                let itemType = itemIndex[0];
+                const itemType = itemIndex[0];
 
-                if (typeof (itemIndex[2]) == 'undefined') {
+                if (typeof (itemIndex[2]) === 'undefined') {
                     if ((temp[itemType][itemIndex[1]] - quantity) >= 0) {
                         inboundOutboundFormat.supplies[itemType][itemIndex[1]] += quantity;
                         temp[itemType][itemIndex[1]] -= quantity;
                     } else {
-                        document.getElementById("error-message").innerHTML = `*Not enough Stock for ${itemIndex[1]}.Only ${ currentStock[itemType][itemIndex[1]]} left`;
+                        document.getElementById('error-message').innerHTML = `*Not enough Stock for ${itemIndex[1]}.Only ${currentStock[itemType][itemIndex[1]]} left`;
                         return 0;
                     }
-
                 } else {
-                    let itemSubType = itemIndex[1];
+                    const itemSubType = itemIndex[1];
                     if ((temp[itemType][itemSubType][itemIndex[2]] - quantity) >= 0) {
                         temp[itemType][itemSubType][itemIndex[2]] -= quantity;
                         inboundOutboundFormat.supplies[itemType][itemSubType][itemIndex[2]] += quantity;
                     } else {
-                        document.getElementById("error-message").innerHTML = `*Not enough Stock for ${itemIndex[2]}. Only ${currentStock[itemType][itemSubType][itemIndex[2]]} left`;
+                        document.getElementById('error-message').innerHTML = `*Not enough Stock for ${itemIndex[2]}. Only ${currentStock[itemType][itemSubType][itemIndex[2]]} left`;
                         return 0;
                     }
-
                 }
-
-            } else if (newItemCount == 0) {
-                document.getElementById("error-message").innerHTML = `*Please Add some elements to continue`;
+            } else if (newItemCount === 0) {
+                document.getElementById('error-message').innerHTML = '*Please Add some elements to continue';
                 return 0;
             }
         }
     }
-    initialStock.forEach(element => {
-        if(element[3]){
+    initialStock.forEach((element) => {
+        if (element[3]) {
             currentStock[element[2]][element[1]][element[0]] -= inboundOutboundFormat.supplies[element[2]][element[1]][element[0]];
-        }else if(element[2]){
+        } else if (element[2]) {
             currentStock[element[1]][element[0]] -= inboundOutboundFormat.supplies[element[1]][element[0]];
         }
     });

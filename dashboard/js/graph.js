@@ -1,13 +1,7 @@
-var slideIndex = 1;
-// Next/previous controls
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
-
+/**
+ * Toggles the slide(graph) to be shown.
+ * @param  n - slide number.
+ */
 function showSlides(n) {
     let i;
     const slides = document.getElementsByClassName('slides');
@@ -30,6 +24,14 @@ function showSlides(n) {
     }
 }
 
+// Next/previous controls
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
 /**
  * This function takes the an array of objects of type "inbound" or "outbound" and returns an array
  of the form [[item,categorySum]]
@@ -37,36 +39,36 @@ function showSlides(n) {
  */
 function findSum(arrayName) {
     const array = JSON.parse(localStorage.getItem(arrayName));
-    let data = [];
+    const data = [];
     array.forEach((element) => {
         data.push(JSON.parse(localStorage.getItem(element)));
     });
-    let stock = [];
+    const stock = [];
     const curStock = JSON.parse(localStorage.getItem('currentStock'));
-    for(let item in curStock){
+    for (const item in curStock) {
         stock.push(data.map((data => data.supplies[item])));
     }
     let categorySum = 0;
     let flag = 0;
-    let rows = [];
+    const rows = [];
     let i = 0;
-    for (let itemCategory of stock) {
-        for (let items of itemCategory) {
-            for (let value in items) {
-                if (typeof (items[value]) == "object") {
+    for (const itemCategory of stock) {
+        for (const items of itemCategory) {
+            for (const value in items) {
+                if (typeof (items[value]) === 'object') {
                     categorySum += (Object.values(items[value])).reduce(arraySum);
-
                 } else {
                     flag = 1;
                     break;
                 }
-            } if (flag == 1) {
+            }
+            if (flag === 1) {
                 categorySum += (Object.values(items)).reduce(arraySum);
             }
         }
         flag = 0;
         rows.push([itemList[i], categorySum]);
-        i++;
+        i += 1;
         categorySum = 0;
     }
     return rows;
@@ -79,7 +81,7 @@ function drawChartCurrent() {
     const req = new XMLHttpRequest();
     req.open('GET', 'shared/json/initial-stock.json', false);
     req.send(null);
-    let initialStock = JSON.parse(req.responseText).supplies;
+    const initialStock = JSON.parse(req.responseText).supplies;
     let inboundSum = [0, 0, 0, 0];
     let outboundSum = [0, 0, 0, 0];
     const incoming = JSON.parse(localStorage.getItem('inbound'));
@@ -90,28 +92,28 @@ function drawChartCurrent() {
     if (outgoing && outgoing.length > 0) {
         outboundSum = findSum('outbound').map(x => x[1]);
     }
-    let initialSum = [];
+    const initialSum = [];
     let subCategorySum = 0;
     let flag = 0;
-    for (let itemCategory in initialStock) {
-        for (let itemsubCategory in initialStock[itemCategory]) {
-            if (typeof (initialStock[itemCategory][itemsubCategory]) == 'object') {
-                subCategorySum += (Object.values(initialStock[itemCategory][itemsubCategory])).reduce(arraySum); 
+    for (const itemCategory in initialStock) {
+        for (const itemsubCategory in initialStock[itemCategory]) {
+            if (typeof (initialStock[itemCategory][itemsubCategory]) === 'object') {
+                subCategorySum += (Object.values(initialStock[itemCategory][itemsubCategory])).reduce(arraySum);
             } else {
                 flag = 1;
                 break;
             }
         }
-        if (flag == 0) {
+        if (flag === 0) {
             initialSum.push(subCategorySum);
             subCategorySum = 0;
-        } else if (flag == 1) {
+        } else if (flag === 1) {
             initialSum.push((Object.values(initialStock[itemCategory])).reduce(arraySum));
         }
         flag = 0;
     }
     let rows = [];
-    rows = itemList.map((value, index) => [value, initialSum[index] + inboundSum[index] - outboundSum[index]]);
+    rows = itemList.map((value, index) => [value, initialSum[index] + inboundSum[index] - outboundSum[index], ]);
     data.addRows(rows);
     // Set chart options
     const options = {
@@ -121,7 +123,7 @@ function drawChartCurrent() {
         pieHole: 0.3,
         pieSliceText: 'value',
         pieSliceTextStyle: {
-            color: 'black',
+            color: 'black'
         },
         backgroundColor: 'transparent'
     };
@@ -148,7 +150,7 @@ function drawChartInbound() {
             pieSliceText: 'value',
             backgroundColor: 'transparent',
             pieSliceTextStyle: {
-                color: 'black',
+                color: 'black'
             },
             pieHole: 0.3
 
@@ -159,7 +161,6 @@ function drawChartInbound() {
 }
 
 function drawChartOutbound() {
-
     const outgoing = JSON.parse(localStorage.getItem('outbound'));
     if (outgoing && outgoing.length > 0) {
         const data = new google.visualization.DataTable();
@@ -175,7 +176,7 @@ function drawChartOutbound() {
             pieSliceText: 'value',
             backgroundColor: 'transparent',
             pieSliceTextStyle: {
-                color: 'black',
+                color: 'black'
             },
             pieHole: 0.3
 
