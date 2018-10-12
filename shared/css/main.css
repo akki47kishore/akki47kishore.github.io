@@ -14,6 +14,12 @@
     position:fixed;
 }
 
+.table-background{
+    background-color: #000000 !important;
+    color: bisque;
+
+}
+
 .dataTables_wrapper .dataTables_filter input {
     margin-left: 0.5em;
     margin-bottom: 0.5em;
@@ -30,10 +36,14 @@
     color: #703030;
     font-size: 30px;
 }
-
 .hide-body{
     position: fixed;
     width : 100%;
+}
+.highlighted-item{
+    font-size: 16.5px;
+    text-align: left;
+    padding-left: 21% !important;
 }
 
 .content{
@@ -126,8 +136,6 @@ a:hover, a:visited, a:active {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
-
 
 .active-page{
     background-color:white;

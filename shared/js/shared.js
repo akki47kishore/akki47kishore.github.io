@@ -169,7 +169,10 @@ function showDetails(...args) {
         searching: true,
         responsive: true,
         paging: false,
-        createdRow: (row) => { $('td', row).eq(1).addClass('highlighted'); }
+        createdRow: (row) => {
+            $('td', row).eq(1).addClass('highlighted');
+            $('td', row).eq(0).addClass('highlighted-item');
+        }
     });
     detailsTable.clear().draw();
     let category = '';
@@ -190,7 +193,7 @@ function showDetails(...args) {
                 if (subcategorySum > 0) {
                     categorySum += subcategorySum;
                     node = Object.keys(category[type]).filter(x => category[type][x] > 0);
-                    node = node.map(x => `<section class='cloth-items'>${x}</section> <section class = 'cloth-items-value'>${category[type][x]}</section>`);
+                    node = node.map(x => `<section class='cloth-items'>${sentenceCase(x)}</section> <section class = 'cloth-items-value'>${category[type][x]}</section>`);
                     node.unshift(`<section class = 'clothType'>${sentenceCase(type)}</section><section class = 'clothType-data'>${subcategorySum}</section>`);
                     childRows += node;
                     childRows = childRows.replace(/,/g, ' ');
@@ -205,7 +208,7 @@ function showDetails(...args) {
             if (categorySum !== 0) {
                 detailsTable.row.add([sentenceCase(element).bold(), categorySum]);
                 node = Object.keys(category).filter(x => category[x] > 0);
-                childRows += node.map(x => `<section class='data'>${x}</section> <section class = 'data-value'>${category[x]}</section>`);
+                childRows += node.map(x => `<section class='data'>${sentenceCase(x)}</section> <section class = 'data-value'>${category[x]}</section>`);
                 childRows = childRows.replace(/,/g, ' ');
                 detailsTable.row(':last').child(childRows);
             }
