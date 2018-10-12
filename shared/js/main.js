@@ -1,6 +1,6 @@
 let initialStock;
 const itemList = [];
-const slideIndex = 1;
+let slideIndex = 1;
 let currentStock;
 
 /**
