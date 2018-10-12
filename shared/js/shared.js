@@ -172,53 +172,45 @@ function showDetails(...args) {
         createdRow: (row) => { $('td', row).eq(1).addClass('highlighted'); }
     });
     detailsTable.clear().draw();
-    let text;
-    let categorySum;
-    let node = null;
-    for (const item in data) {
+    let category = '';
+    let subcategory = [];
+    let categorySum = 0;
+    let subcategorySum = 0;
+
+    itemList.forEach((element) => {
+        category = data[element];
+        subcategory = Object.keys(category);
+        let node;
         categorySum = 0;
-        node = null;
-        for (const value in data[item]) {
-            if (typeof (data[item][value]) !== 'object') {
-                if (data[item][value] !== 0) {
-                    categorySum += data[item][value];
-                    text = sentenceCase(value);
-                    if (!node) {
-                        node = `<ul ><li><section class = 'data'> ${text}</section> <section class='data-value'>${data[item][value]}</section></li>`;
-                    } else {
-                        node += `<li ><section class = 'data'> ${text}</section> <section class='data-value'>${data[item][value]}</section></li>`;
-                    }
-                }
-            } else {
-                let subsection = null;
-                let subcategorySum = 0;
-                for (const subCategoryValue in data[item][value]) {
-                    if (data[item][value][subCategoryValue] !== 0) {
-                        subcategorySum += data[item][value][subCategoryValue];
-                        text = sentenceCase(subCategoryValue);
-                        if (!subsection) {
-                            subsection = `<li> <section class='cloth-items'>${text}</section> <section class='cloth-items-value'>${data[item][value][subCategoryValue]}</section></li>`;
-                        } else {
-                            subsection += `<li> <section class='cloth-items'>${text}</section><section class='cloth-items-value'>${data[item][value][subCategoryValue]}</section></li>`;
-                        }
-                    }
-                }
-                categorySum += subcategorySum;
-                if (subcategorySum !== 0) {
-                    if (!node) {
-                        node = `<ul><li><section class = 'clothType'>${sentenceCase(value)}</section><section class = 'clothType-data'>${subcategorySum}</section> ${subsection}`;
-                    } else {
-                        node += `<li><section class = 'clothType'>${sentenceCase(value)}</section><section class = 'clothType-data'>${subcategorySum}</section> ${subsection}`;
-                    }
+        let childRows = '';
+        if (typeof (category[subcategory[0]]) === 'object') {
+            for (const type of subcategory) {
+                subcategorySum = 0;
+                subcategorySum = Object.values(category[type]).reduce(arraySum);
+                if (subcategorySum > 0) {
+                    categorySum += subcategorySum;
+                    node = Object.keys(category[type]).filter(x => category[type][x] > 0);
+                    node = node.map(x => `<section class='cloth-items'>${x}</section> <section class = 'cloth-items-value'>${category[type][x]}</section>`);
+                    node.unshift(`<section class = 'clothType'>${sentenceCase(type)}</section><section class = 'clothType-data'>${subcategorySum}</section>`);
+                    childRows += node;
+                    childRows = childRows.replace(/,/g, ' ');
                 }
             }
+            if (categorySum !== 0) {
+                detailsTable.row.add([sentenceCase(element).bold(), categorySum]);
+                detailsTable.row(':last').child(childRows);
+            }
+        } else {
+            categorySum = Object.values(category).reduce(arraySum);
+            if (categorySum !== 0) {
+                detailsTable.row.add([sentenceCase(element).bold(), categorySum]);
+                node = Object.keys(category).filter(x => category[x] > 0);
+                childRows += node.map(x => `<section class='data'>${x}</section> <section class = 'data-value'>${category[x]}</section>`);
+                childRows = childRows.replace(/,/g, ' ');
+                detailsTable.row(':last').child(childRows);
+            }
         }
-        if (categorySum !== 0) {
-            detailsTable.row.add([sentenceCase(item).bold(), categorySum]);
-            detailsTable.row(':last').child(`${node} </ul>`).hide();
-        }
-    }
-
+    });
     detailsTable.draw(false);
 
     $(`#${table} tbody`).on('click', 'tr', function () {
