@@ -1,5 +1,5 @@
 let initialStock;
-const itemList = [];
+let itemList = [];
 let slideIndex = 1;
 let currentStock;
 
@@ -60,24 +60,25 @@ function setCurrentStock() {
 }
 
 function initialStockArrayConverter() {
-    arrayOfItems = [];
+    let arrayOfItems = [];
     const req = new XMLHttpRequest();
     req.open('GET', 'shared/json/initial-stock.json', false);
     req.send(null);
     const stock = JSON.parse(req.responseText).supplies;
-
-    for (category in stock) {
-        for (item in stock[category]) {
-            if (typeof (stock[category][item]) === 'object') {
-                for (subCategoryItems in stock[category][item]) {
-                    arrayOfItems.push([subCategoryItems, item, category, stock[category][item][subCategoryItems]]);
-                }
-            } else {
-                arrayOfItems.push([item, category, stock[category][item]]);
+    let subcategory ;
+    itemList = Object.keys(stock);
+    itemList.forEach((element) =>{
+        subcategory = Object.keys(stock[element]);
+        if(typeof (stock[element][subcategory[0]]) !== 'object'){
+            arrayOfItems = arrayOfItems.concat(subcategory.map(x => [x,element,stock[element][x]]));
+        }else {
+            for(const subCategoryTypes of subcategory){
+                subCategoryItems =  Object.keys(stock[element][subCategoryTypes]);
+                arrayOfItems = arrayOfItems.concat(subCategoryItems.map(x => [x,subCategoryTypes,element,stock[element][subCategoryTypes][x]]));
             }
         }
-        itemList.push(category);
-    }
+    });
+    console.log(arrayOfItems);
     return arrayOfItems;
 }
 
