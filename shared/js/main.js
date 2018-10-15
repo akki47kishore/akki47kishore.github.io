@@ -78,7 +78,6 @@ function initialStockArrayConverter() {
             }
         }
     });
-    console.log(arrayOfItems);
     return arrayOfItems;
 }
 
